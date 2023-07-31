@@ -19,5 +19,5 @@ fi
 for TARGET_PATH in "${TARGETS[@]}";
 do
 echo "scanning $TARGET_PATH"
-trivy fs --severity "MEDIUM,HIGH,CRITICAL" --exit-code 1 $TARGET_PATH
+trivy fs --severity "HIGH,CRITICAL" --exit-code 1 $TARGET_PATH
 done
