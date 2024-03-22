@@ -9,6 +9,28 @@ The version would be set as follows:
 - If the push is on a branch named `release-<version>` then the version would be `<version>-rc`.
 - If the push is on any other branch, then the version would be `<version>-<github_run_number>`. The version will be read from `package/.appversion`.
 
+## 📦 [transifex.sh](./transifex.sh)
+
+This script simplifies the process of managing translations for Bahmni projects. It is used for pushing and pulling translations to/from Transifex. It checks if the Transifex CLI is installed, and if not, installs it. Then, it performs the specified Transifex operation (push or pull) based on the provided argument.
+
+To use this script:
+
+1. Save the script in your repository.
+2. Make sure to have a `.tx/config` file in your repository for Transifex configuration.
+3. Make the script executable by running the following command in your terminal:
+    ```
+    chmod +x transifex.sh
+    ```
+4. Run the script with the appropriate argument (push or pull) to perform the desired operation.
+
+    Example usage:
+    ```
+    ./transifex.sh push
+    ./transifex.sh pull
+    ```
+
+    **_NOTE:_** Replace `./transifex.sh` with the actual path to your script file if it's located in a different directory.
+
 ## 📦 [trivy_scan.sh](./trivy_scan.sh)
 
 This script can be used in Github Actions to run a [Trivy Filesystem scan](https://aquasecurity.github.io/trivy/v0.19.2/vulnerability/scanning/filesystem/) and [Secrets Scan](https://aquasecurity.github.io/trivy/v0.27.1/docs/secret/scanning/).
