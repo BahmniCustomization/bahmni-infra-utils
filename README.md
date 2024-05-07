@@ -21,6 +21,10 @@ To use this script:
 
     **_NOTE:_** Replace `./container-scanner.sh` with the actual path to your script file if it's located in a different directory.
 
+## 📦 [html.tpl](./html.tpl)
+
+The provided HTML template is used by the Trivy vulnerability scanner in the `container-scanner.sh` script to generate detailed reports on container images. The template is responsible for formatting the vulnerability and misconfiguration data produced by Trivy scans into an easily readable and visually structured HTML document.
+
 ## 📦 [setArtifactVersion.sh](./setArtifactVersion.sh)
 
 This is used in Github Actions to set `ARTIFACT_VERSION` as an environment variable in the actions runner.
