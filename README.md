@@ -1,29 +1,29 @@
 # bahmni-infra-utils
 Non-application specific utilities for Bahmni infra
 
-## 📦 [container-scanner.sh](./container-scanner.sh)
+## 📦 [image-scanner.sh](./image-scanner.sh)
 
-This shell script automates the process of scanning container images from a specific Docker organization (in this case, bahmni) using the Trivy vulnerability scanner. The script retrieves a list of Docker repositories from Docker Hub and runs Trivy scans on each image to generate security reports. These reports are saved as HTML files in a designated directory.
+This shell script automates the process of scanning images from a specific Docker organization (in this case, bahmni) using the Trivy vulnerability scanner. The script retrieves a list of Docker repositories from Docker Hub and runs Trivy scans on each image to generate security reports. These reports are saved as HTML files in a designated directory.
 
 To use this script:
 
-1. Save the script as container-scanner.sh.
+1. Save the script as image-scanner.sh.
 2. Make the script executable by running the following command in your terminal:
     ```
-    chmod +x container-scanner.sh
+    chmod +x image-scanner.sh
     ```
-3. Run the script to generate the scan report of container images from Bahmni namespace.
+3. Run the script to generate the scan report of the images from Bahmni namespace.
 
     Example usage:
     ```
-    ./container-scanner.sh
+    ./image-scanner.sh
     ```
 
-    **_NOTE:_** Replace `./container-scanner.sh` with the actual path to your script file if it's located in a different directory.
+    **_NOTE:_** Replace `./image-scanner.sh` with the actual path to your script file if it's located in a different directory.
 
 ## 📦 [html.tpl](./html.tpl)
 
-The provided HTML template is used by the Trivy vulnerability scanner in the `container-scanner.sh` script to generate detailed reports on container images. The template is responsible for formatting the vulnerability and misconfiguration data produced by Trivy scans into an easily readable and visually structured HTML document.
+The provided HTML template is used by the Trivy vulnerability scanner in the `image-scanner.sh` script to generate detailed reports on the images. The template is responsible for formatting the vulnerability and misconfiguration data produced by Trivy scans into an easily readable and visually structured HTML document.
 
 ## 📦 [setArtifactVersion.sh](./setArtifactVersion.sh)
 
