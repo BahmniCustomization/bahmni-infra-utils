@@ -3,7 +3,7 @@ Non-application specific utilities for Bahmni infra
 
 ## 📦 [image-scanner.sh](./image-scanner.sh)
 
-This shell script automates the process of scanning images from a specific Docker organization (in this case, bahmni) using the Trivy vulnerability scanner. The script retrieves a list of Docker repositories from Docker Hub and runs Trivy scans on each image to generate security reports. These reports are saved as HTML files in a designated directory.
+This shell script automates the process of scanning images from a specific Docker organization (passed in, as an argument) using the Trivy vulnerability scanner. The script retrieves a list of Docker repositories from Docker Hub and runs Trivy scans on each image to generate security reports. These reports are saved as HTML files in a designated directory.
 
 To use this script:
 
@@ -12,11 +12,11 @@ To use this script:
     ```
     chmod +x image-scanner.sh
     ```
-3. Run the script to generate the scan report of the images from Bahmni namespace.
+3. Run the script with the organization name as the argument to generate the scan report of the images from bahmni namespace.
 
     Example usage:
     ```
-    ./image-scanner.sh
+    ./image-scanner.sh bahmni
     ```
 
     **_NOTE:_** Replace `./image-scanner.sh` with the actual path to your script file if it's located in a different directory.

@@ -5,18 +5,25 @@
 # as it progresses through the application life cycle. Container scanning takes its cues 
 # from practices like vulnerability scanning and penetration testing.
 
-# This script uses Trivy, a simple and comprehensive vulnerability scanner
-# for containers and other artifacts. Trivy can find vulnerabilities, 
-# IaC misconfigurations, secrets, SBOM discovery, Cloud scanning, Kubernetes security risks, 
-# and more. More information about Trivy can be found at https://trivy.dev/.
+# This script uses Trivy, a simple and comprehensive vulnerability scanner for containers
+# and other artifacts. Trivy can find vulnerabilities, IaC misconfigurations, secrets, 
+# SBOM discovery, Cloud scanning, Kubernetes security risks, and more. 
+# More information about Trivy can be found at https://trivy.dev/.
 
 # This shell script automates the process of scanning container images from a specific Docker 
-# organization (in this case, bahmni) using the Trivy vulnerability scanner. The script 
+# organization (passed in, as an argument) using the Trivy vulnerability scanner. The script 
 # retrieves a list of Docker repositories from Docker Hub and runs Trivy scans on each image 
 # to generate security reports. These reports are saved as HTML files in a designated directory.
 
-# Get Docker Organization Name
-ORG="bahmni"
+# Check if the organization name is provided as an argument
+if [ -z "$1" ]; then
+    echo "Error: Please provide the Docker organization name as an argument."
+    echo "Usage: $0 <organization_name>"
+    exit 1
+fi
+
+# Get Docker Organization Name from the script argument
+ORG="$1"
 
 # Check if trivy is installed and install it if not
 if ! command -v trivy &> /dev/null; then
@@ -33,7 +40,7 @@ REPO_LIST=$(curl -s "https://hub.docker.com/v2/repositories/${ORG}/?page_size=10
 # Get today's date in the desired format for folder naming
 TODAY_DATE=$(date +'%d-%m-%Y')
 # Define the root and sub directory name
-ROOT_DIR="container-scanner-reports"
+ROOT_DIR="image-scanner-reports"
 DIR="bahmni-${TODAY_DATE}"
 
 # Check if the root directory exists and create it if not
@@ -44,7 +51,7 @@ else
     echo "Root Directory $ROOT_DIR already exists, proceeding"
 fi
 
-# Check if the root directory exists and create it if not
+# Check if the sub directory exists and create it if not
 if [ ! -d "$ROOT_DIR/$DIR" ]; then
     echo "Creating directory $ROOT_DIR/$DIR"
     mkdir "$ROOT_DIR/$DIR"
@@ -56,12 +63,8 @@ echo "Generating scan report...."
 
 # Iterate through each image and run Trivy scan
 for image in $REPO_LIST; do
-    # Extract image name and tag
-    image_name=$(echo "$image" | cut -d ':' -f 1)
-    tag="$(echo "$image" | cut -d ':' -f 2)"
-
     # Replace '/' with '-' in the image name
-    image_name=$(echo "$image_name" | tr '/' '-')
+    image_name=$(echo "$image" | tr '/' '-')
 
     # Define the Output File
     output_file_txt="$ROOT_DIR/${DIR}/${image}-${TODAY_DATE}.html"
