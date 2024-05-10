@@ -43,21 +43,8 @@ TODAY_DATE=$(date +'%d-%m-%Y')
 ROOT_DIR="image-scanner-reports"
 DIR="bahmni-${TODAY_DATE}"
 
-# Check if the root directory exists and create it if not
-if [ ! -d "$ROOT_DIR" ]; then
-    echo "Creating directory $ROOT_DIR"
-    mkdir "$ROOT_DIR"
-else
-    echo "Root Directory $ROOT_DIR already exists, proceeding"
-fi
-
-# Check if the sub directory exists and create it if not
-if [ ! -d "$ROOT_DIR/$DIR" ]; then
-    echo "Creating directory $ROOT_DIR/$DIR"
-    mkdir "$ROOT_DIR/$DIR"
-else
-    echo "Directory $ROOT_DIR/$DIR already exists, proceeding"
-fi
+# Create the root and sub directory if it doesn't exist
+mkdir -p "$ROOT_DIR/$DIR"
 
 echo "Generating scan report...."
 
