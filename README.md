@@ -1,6 +1,30 @@
 # bahmni-infra-utils
 Non-application specific utilities for Bahmni infra
 
+## 📦 [image-scanner.sh](./image-scanner.sh)
+
+This shell script automates the process of scanning images from a specific Docker organization (passed in, as an argument) using the Trivy vulnerability scanner. The script retrieves a list of Docker repositories from Docker Hub and runs Trivy scans on each image to generate security reports. These reports are saved as HTML files in a designated directory.
+
+To use this script:
+
+1. Save the script as image-scanner.sh.
+2. Make the script executable by running the following command in your terminal:
+    ```
+    chmod +x image-scanner.sh
+    ```
+3. Run the script with the organization name as the argument to generate the scan report of the images from bahmni namespace.
+
+    Example usage:
+    ```
+    ./image-scanner.sh bahmni
+    ```
+
+    **_NOTE:_** Replace `./image-scanner.sh` with the actual path to your script file if it's located in a different directory.
+
+## 📦 [html.tpl](./html.tpl)
+
+The provided HTML template is used by the Trivy vulnerability scanner in the `image-scanner.sh` script to generate detailed reports on the images. The template is responsible for formatting the vulnerability and misconfiguration data produced by Trivy scans into an easily readable and visually structured HTML document.
+
 ## 📦 [setArtifactVersion.sh](./setArtifactVersion.sh)
 
 This is used in Github Actions to set `ARTIFACT_VERSION` as an environment variable in the actions runner.
